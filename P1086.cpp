@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <cmaths>
+#include <cmath>
 
 using namespace std;
 
@@ -18,6 +18,7 @@ bool comp(node x, node y)
 
 int main()
 {
+    freopen("test.txt", "r", stdin);
     int m, n, k;
     cin >> m >> n >> k;
     int i;
@@ -47,7 +48,7 @@ int main()
     {
         if (i == 0)
         {
-            if (a[i].x * 2 < k)
+            if (a[i].x * 2 + 1 > k)
             {
                 cout << 0;
                 return 0;
@@ -56,12 +57,22 @@ int main()
             {
                 num += a[i].data;
                 k -= a[i].x;
+                k--;
             }
         }
         else
         {
-            
+            if (abs(a[i].x - a[i - 1].x) + abs(a[i].y - a[i - 1].y) + 1 + a[i].x <= k)
+            {
+                num += a[i].data;
+                k -= abs(a[i].x - a[i - 1].x) + abs(a[i].y - a[i - 1].y);
+                k--;
+            }
+            else
+                break;
         }
-        
     }
+    cout << num;
+    fclose(stdin);
+    return 0;
 }
