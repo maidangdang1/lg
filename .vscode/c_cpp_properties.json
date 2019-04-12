@@ -31,7 +31,7 @@
             },
             "limitSymbolsToIncludedHeaders": true,
             "databaseFilename": "",
-            "compilerPath": "E:\\vs code\\mingw\\mingw64\\bin\\gcc.exe",
+            "compilerPath": "F:/MinGW/mingw64/bin/gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }
