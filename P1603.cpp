@@ -8,8 +8,8 @@ using namespace std;
 int main()
 {
     freopen("test.txt", "r", stdin);
-    string num[21] = {"00", "01", "04", "09", "16", "25", "36", "49", "64", "81", "00", "21", "44", "69", "96", "25", "56", "79", "24", "61", "00"};
-    string en[21] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+    string num[27] = {"00", "01", "04", "09", "16", "25", "36", "49", "64", "81", "00", "21", "44", "69", "96", "25", "56", "79", "24", "61", "00", "01", "04", "01", "01", "04", "09"};
+    string en[27] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "a", "both", "another", "first", "second", "third"};
     string ans[6];
     int i;
     int j;
@@ -28,7 +28,7 @@ int main()
             s = temp;
         */
        cin >> s;
-        for (j = 0;j < 21;j++)
+        for (j = 0;j < 27;j++)
         {
             if (s == en[j])
             {
@@ -36,6 +36,19 @@ int main()
                 cnt++;
             }
         }
+        /*
+        if (s == "a")
+        {
+            ans[cnt] = num[1];
+            cnt++;
+        }
+        */
+    }
+    if (cnt == 0)
+    {
+        cout << 0;
+        fclose(stdin);
+        return 0;
     }
     bool fir = false;
     for (i = 1;i < cnt;i++)
