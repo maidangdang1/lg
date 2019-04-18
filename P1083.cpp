@@ -1,6 +1,17 @@
 #include <iostream>
+#include <cstring>
+#include <string>
+#include <cstdio>
 
 using namespace std;
+
+struct node
+{
+    int d;
+    int s;
+    int t;
+};
+
 
 int main()
 {
@@ -8,11 +19,17 @@ int main()
     int n, m;
     cin >> n >> m;
     int r[n + 10];
+    int b[n + 10];
+    int cf[n + 10];
+    memset(cf, 0, sizeof(cf));
+    node a[m + 10];
     int i;
     for (i = 1;i <= n;i++)
         cin >> r[i];
+    r[0] = r[1];
     int d, s, t;
     int j;
+    /*
     for (i = 1;i <= m;i++)
     {
         cin >> d >> s >> t;
@@ -29,6 +46,23 @@ int main()
         }
     }
     cout << 0;
+    */
+    for (i = 1;i <= m;i++)
+        cin >> a[i].d >> a[i].s >> a[i].t;
+    int j;
+    for (i = m;i > 0;i--)
+    {
+        memset(cf, 0, sizeof(cf));
+        for (j = 1;j <= i;j++)
+        {
+            cf[a[j].s] -= a[j].d;
+            cf[a[j].t + 1] += a[j].d;
+        }
+        for (j = 1;j <= m;j++)
+            b[j] = r[j];
+        for (j = 1;j <= m;j++)
+            cf[j] += cf[j - 1];
+    }
     //fclose(stdin);
     return 0;
 }
