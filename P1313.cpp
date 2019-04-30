@@ -31,6 +31,8 @@ int main()
     freopen("test.txt", "r", stdin);
     int a, b, k, n, m;
     cin >> a >> b >> k >> n >> m;
+    a %= mod;
+    b %= mod;
     if (k == 0)
     {
         cout << 1;
@@ -53,8 +55,7 @@ int main()
     }
     int temp1 = qpow(a, n);
     int temp2 = qpow(b, m);
-    unsigned long long ans = temp1 * temp2 * c[n];
-    ans %= mod;
+    unsigned long long ans = (temp1 * temp2) % mod * c[n] % mod;
     cout << ans;
     fclose(stdin);
     return 0;
