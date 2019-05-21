@@ -10,6 +10,7 @@ int maxi = 0;
 string ans[50];
 int help[50];
 int nowans;
+char limit;
 
 struct node
 {
@@ -22,7 +23,9 @@ bool check(int num)
     int i;
     int len1 = ans[num].length();
     int len2 = ans[num + 1].length();
-    if (len1 <= len2)
+    if (ans[num] == ans[num + 1])
+        ;
+    else if (len1 <= len2)
     {
         for (i = 0;i < len1;i++)
         {
@@ -36,7 +39,7 @@ bool check(int num)
     {
         for (i = 0;i < len2;i++)
         {
-            if (ans[num][i] != ans[num + 1][i])
+            if (ans[num][len1 - len2 + i] != ans[num + 1][i])
                 break;
         }
         if (i == len2)
@@ -68,23 +71,28 @@ void dfs(int floor)
     if (floor > n * 2)
     {
     	memset(help, 0, sizeof(help));
-        for (i = 1;i < n * 2;i++)
+        for (i = 1;i <= n * 2;i++)
         {
+        	if (ans[1][0] != limit)
+        		break;
             //cout << ans[i] << " ";
-            if (check(i) == false)
+            if (check(i) == false|| i == n * 2)
             {
                 nowans = 0;
                 for (j = 1;j <= i;j++)
                     nowans += ans[j].length();
                 for (j = 1;j < i;j++)
-                    nowans -= help[j] * 2;
+                    nowans -= help[j];
                 if (nowans > maxi)
                 {
                 	maxi = nowans;
+                	/*
                 	for (j = 1;j <= i;j++)
                 		cout << ans[j] << " ";
                 	cout << endl;
+                	*/
 				}
+				break;
             }
         }
         //cout << endl;
@@ -112,6 +120,7 @@ int main()
     int i;
     for (i = 1;i <= n;i++)
         cin >> s[i].ss;
+    cin >> limit;
     dfs(1);
     cout << maxi;
     fclose(stdin);
