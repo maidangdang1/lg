@@ -1,3 +1,4 @@
+//#pragma GCC optimize(3)
 #include <iostream>
 #include <queue>
 #include <cstdio>
@@ -25,8 +26,11 @@ int main()
     q.push(y);
     int temp1;
     int temp2;
+    int nowx;
+    int nowy;
     int help[8][2] = {{-2, -1}, {2, -1}, {-2, 1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2}};
     int i;
+    a[x][y].used = true;
     while (q.empty() == false)
     {
         temp1 = q.front();
@@ -37,13 +41,21 @@ int main()
         if (a[temp1][temp2].used == true || temp1 <= 0 || temp1 > n || temp2 <= 0 || temp2 > m)
             continue;
         */
-        a[temp1][temp2].used = true;
         for (i = 0;i < 8;i++)
         {
-            if (a[temp1 + help[i][0]][temp2 + help[i][1]].used == true || temp1 + help[i][0] <= 0 || temp1 + help[i][0] > n || temp2 + help[i][1] <= 0 || temp2 + help[i][1] > m)
-            q.push(temp1 + help[i][0]);
-            q.push(temp2 + help[i][1]);
-            a[temp1 + help[i][0]][temp2 + help[i][1]].data = a[temp1][temp2].data + 1;
+            nowx = temp1 + help[i][0];
+            nowy = temp2 + help[i][1];
+            if (a[nowx][nowy].used == true)
+                continue;
+            if (nowx <= 0 || nowx > n || nowy <= 0 || nowy > m)
+                ;
+            else
+            {
+                q.push(nowx);
+                q.push(nowy);
+                a[nowx][nowy].data = a[temp1][temp2].data + 1;
+                a[nowx][nowy].used = true;
+            }
         }
     }
     int j;
@@ -56,6 +68,7 @@ int main()
             else
                 cout << left << setw(5) << a[i][j].data;
         }
+        cout << endl;
     }
     fclose(stdin);
     return 0;
