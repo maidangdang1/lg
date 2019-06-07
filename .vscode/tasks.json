@@ -1,6 +1,8 @@
 {
     "version": "2.0.0",
     "command": "g++",
+    "isShellCommand": true,
+    "showOutput": "always",
     "args": ["-g","-std=c++11","${file}","-o","${workspaceRoot}\\${fileBasename}.exe"],
     "problemMatcher": {
         "owner": "cpp",
