@@ -1,51 +1,55 @@
 #include <iostream>
-#include <cmath>
+
 using namespace std;
-bool pd = false;
-void cifang(int n)
+
+int help[] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384};
+
+void dfs(int temp)
 {
-	int i;
-	//bool pd = false;
-	while (n > 0)
-	{
-		for (i = 0;; i++)
-		{
-			if (pow(2, i) > n)
-				break;
-		}
-		i--;
-		n = n - pow(2, i);
-		if (pd)
-			cout << "+";
-		if (i != 2 && i != 0)
-		{
-			if (i == 1)
-			{
-				cout << "2";
-				pd = true;
-				cifang(n);
-			}
-			else
-			{
-				cout << "2(";
-				cifang(i);
-				cout << ")";
-			}
-		}
-		else
-		{
-			cout << "2(" << i << ")";
-		}
-		pd = true;
-		cifang(n);
-	}
+    if (temp == 2)
+    {
+        cout << 2;
+        return;
+    }
+    if (temp == 0)
+    {
+        cout << "0";
+        return;
+    }
+    int i;
+    bool flag = false;
+    while (temp)
+    {
+        if (flag)
+            cout << "+";
+        for (i = 14;i >= 0;i--)
+        {
+            if (temp - help[i] >= 0)
+            {
+            	if (help[i] == 2)
+                    cout << 2;
+                else if (help[i] == 1)
+                    cout << "2(0)";
+                else
+                {
+                    cout << "2(";
+                    dfs(i);
+                    cout << ")";
+                }
+                break;
+            }
+        }
+        temp -= help[i];
+        flag = true;
+    }
 }
+
 int main()
 {
-	freopen("test.txt", "r", stdin);
-	int n;
-	cin >> n;
-	cifang(n);
-	fclose(stdin);
-	return 0;
+    freopen("test.txt", "r", stdin);
+    int n;
+    cin >> n;
+    dfs(n);
+    fclose(stdin);
+    return 0;
 }
