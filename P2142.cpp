@@ -57,7 +57,16 @@ int main()
         ans.push(a[i] - b[i]);
     }
     while (ans.top() == 0)
+    {
         ans.pop();
+        if (ans.empty())
+            break;
+    }
+    if (ans.empty())
+    {
+        cout << 0;
+        return 0;
+    }
     while (!ans.empty())
     {
         cout << ans.top();
